@@ -4,12 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Jobs\GetCovidData;
 use App\Models\Country;
-use Illuminate\Http\Request;
 
-
+/**
+ * Class CovidDataController
+ * @package App\Http\Controllers
+ */
 class CovidDataController extends Controller
 {
 
+    /**
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function refreshTable()
     {
         $countries = Country::all();

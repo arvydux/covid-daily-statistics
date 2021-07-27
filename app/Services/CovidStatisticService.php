@@ -6,8 +6,16 @@ use App\Models\Country;
 use Carbon\Carbon;
 use GuzzleHttp\Client;
 
+/**
+ * Class CovidStatisticService
+ * @package App\Services
+ */
 class CovidStatisticService
 {
+    /**
+     * @return mixed
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
     public function getTotalCovidData()
     {
         $httpClient = new Client();
