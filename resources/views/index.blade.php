@@ -37,7 +37,7 @@
                     <form  action="{{ route('updateData') }}"  method="get" class="form-inline">
                         @csrf
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary ">Get data for</button>
+                            <button type="submit" class="btn btn-primary ">Get latest data</button>
                         </div>
                     </form>
                 </div>
