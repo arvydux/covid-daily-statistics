@@ -16,9 +16,8 @@ class GetCovidData implements ShouldQueue
 
     private $country;
 
-    public function __construct($country)
+    public function __construct()
     {
-        $this->country = $country;
     }
 
     public function handle(CovidStatisticService $covidStatisticService)
