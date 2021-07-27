@@ -28,7 +28,6 @@ class CovidStatisticService
                     'date' =>  Carbon::parse($country->Date)]
             );
         }
-
         return $response;
     }
 }

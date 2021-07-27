@@ -13,8 +13,10 @@ class CovidDataController extends Controller
     public function refreshTable()
     {
         $countries = Country::all();
+
         return view('index', [
             'countries' => $countries,
+            'last_updated_at' => $countries[0]->date
         ]);
 
     }
@@ -22,6 +24,6 @@ class CovidDataController extends Controller
     public function updateData()
     {
         $job = new GetCovidData();
-        $data = $this->dispatch($job);
+        $this->dispatch($job);
     }
 }

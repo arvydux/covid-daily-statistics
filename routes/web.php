@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Services\CovidStatisticService;
+use App\Http\Controllers\CovidDataController;
 
-Route::get('/', [CovidStatisticService::class, 'getTotalCovidData']);
+Route::get('/', [CovidDataController::class, 'refreshTable'])->name('refreshData');;
+Route::get('/update', [CovidDataController::class, 'updateData'])->name('updateData');;
