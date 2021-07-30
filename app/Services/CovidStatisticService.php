@@ -36,11 +36,6 @@ class CovidStatisticService
      */
     public function getDataByRequest(Request $request)
     {
-        $request->validate([
-            'from'    => 'required|date',
-            'to'      => 'required|date|after_or_equal:from',
-        ]);
-
         if ($request['from']) {
             $from = Carbon::createFromFormat('Y-m-d', $request['from'])->startOfDay()->toIso8601ZuluString();
         } else {
