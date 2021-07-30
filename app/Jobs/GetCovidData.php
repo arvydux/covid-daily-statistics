@@ -18,8 +18,6 @@ class GetCovidData implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    private $country;
-
     public function __construct()
     {
     }
@@ -30,6 +28,6 @@ class GetCovidData implements ShouldQueue
      */
     public function handle(CovidStatisticService $covidStatisticService)
     {
-        $covidStatisticService->getTotalCovidData();
+        return $covidStatisticService->getLatestDataFromAPI();
     }
 }
