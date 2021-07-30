@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Jobs\GetCovidData;
-use App\Models\Country;
+use App\Services\CovidStatisticService;
+use Illuminate\Http\Request;
 
 /**
  * Class CovidDataController
@@ -12,23 +12,17 @@ use App\Models\Country;
 class CovidDataController extends Controller
 {
 
-    /**
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
-     */
-    public function refreshTable()
+    public function showCovidData(CovidStatisticService $covidStatisticService, Request $request)
     {
-        $countries = Country::all();
+        $countriesNames = $covidStatisticService->getAllCountriesNames();
+        $singleCountryData = $covidStatisticService->getDataByRequest($request);
+        $latestUpdatedData = $covidStatisticService->getUpdatedDataFromDB();
 
         return view('index', [
-            'countries' => $countries,
-            'last_updated_at' => $countries[0]->date
+            'countriesNames' => $countriesNames,
+            'singleCountryData' => $singleCountryData,
+            'countries' => $latestUpdatedData['countries'],
+            'lastUpdatedAt' => $latestUpdatedData['lastUpdatedAt'],
         ]);
-
-    }
-
-    public function updateData()
-    {
-        $job = new GetCovidData();
-        $this->dispatch($job);
     }
 }
