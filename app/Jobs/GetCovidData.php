@@ -28,6 +28,6 @@ class GetCovidData implements ShouldQueue
      */
     public function handle(CovidStatisticService $covidStatisticService)
     {
-        return $covidStatisticService->getLatestDataFromAPI();
+        return $covidStatisticService->getAndSaveLatestDataFromAPI();
     }
 }

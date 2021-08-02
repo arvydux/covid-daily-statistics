@@ -25,7 +25,7 @@
                                 <label>Select countries or provinces</label>
                                 <select id="countriesNames" name="country">
                                     <option value="" selected disabled>Countries and provinces</option>
-                                    @foreach($countriesNames as $slug => $country)
+                                    @foreach($countryNamesList as $slug => $country)
                                         <option @if($slug === request()->get('country')) selected @endif value="{{ $slug }}">{{ $country }}</option>
                                     @endforeach
                                 </select>
@@ -42,7 +42,7 @@
                 </form>
             </div>
             <div class="table100">
-                <h2 class="text-center"> {{ ucfirst(request()->get('country'))}} <span><img src="https://img.icons8.com/color/48/000000/{{request()->get('country')}}.png" alt="{{request()->get('country')}}" onerror="this.style.display='none'"></span></h2>
+                <h2 class="text-center"> {{ucfirst($singleCountryName)}} <span><img src="https://img.icons8.com/color/48/000000/{{$singleCountryName}}.png" alt="{{$singleCountryName}}" onerror="this.style.display='none'"></span></h2>
                 <table class="mt-2"
                        data-toggle="table"
                        data-pagination="true">

@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\Country;
+use App\Services\CovidStatisticService;
 use Carbon\Carbon;
 use GuzzleHttp\Client;
 use Illuminate\Console\Command;
@@ -40,22 +41,7 @@ class GetUpdatedCovidData extends Command
      */
     public function handle()
     {
-        $httpClient = new Client();
-        $request = $httpClient->get("https://api.covid19api.com/summary");
-        $response = json_decode($request->getBody()->getContents());
-        foreach ($response->Countries as $country){
-            Country::updateOrCreate(
-                ['country' => $country->Country],
-                ['country' => $country->Country,
-                    'new_confirmed' => $country->NewConfirmed,
-                    'total_confirmed' => $country->TotalConfirmed,
-                    'new_deaths' => $country->NewDeaths,
-                    'total_deaths' => $country->TotalDeaths,
-                    'new_recovered' => $country->NewRecovered,
-                    'total_recovered' => $country->TotalRecovered,
-                    'date' =>  Carbon::parse($country->Date)]
-            );
-        }
-
+        $covidStatisticService = new CovidStatisticService();
+        $covidStatisticService->getAndSaveLatestDataFromAPI();
     }
 }

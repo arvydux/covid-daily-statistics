@@ -11,16 +11,23 @@ use Illuminate\Http\Request;
  */
 class CovidDataController extends Controller
 {
-
+    /**
+     * @param CovidStatisticService $covidStatisticService
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
     public function showCovidData(CovidStatisticService $covidStatisticService, Request $request)
     {
-        $countriesNames = $covidStatisticService->getAllCountriesNames();
+        $countryNamesList = $covidStatisticService->getAllCountryNamesList();
         $singleCountryData = $covidStatisticService->getDataByRequest($request);
-        $latestUpdatedData = $covidStatisticService->getUpdatedDataFromDB();
+        $latestUpdatedData = $covidStatisticService->getDataFromDB();
 
         return view('index', [
-            'countriesNames' => $countriesNames,
-            'singleCountryData' => $singleCountryData,
+            'countryNamesList' => $countryNamesList,
+            'singleCountryName' => $singleCountryData['countryName'],
+            'singleCountryData' => $singleCountryData['countryData'],
+            //allCountriesData
             'countries' => $latestUpdatedData['countries'],
             'lastUpdatedAt' => $latestUpdatedData['lastUpdatedAt'],
         ]);
