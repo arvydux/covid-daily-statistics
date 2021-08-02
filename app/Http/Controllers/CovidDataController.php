@@ -27,7 +27,6 @@ class CovidDataController extends Controller
             'countryNamesList' => $countryNamesList,
             'singleCountryName' => $singleCountryData['countryName'],
             'singleCountryData' => $singleCountryData['countryData'],
-            //allCountriesData
             'countries' => $latestUpdatedData['countries'],
             'lastUpdatedAt' => $latestUpdatedData['lastUpdatedAt'],
         ]);
